@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CONTROL + ALT + DELETE Camp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #ffffff;
+      color: #7f0000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    nav {
+      background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8em 1em;
+      width: 100%;
+    }
+
+    .logo-container {
+      flex-shrink: 0;
+      margin-right: 1em;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1) rotate(2deg);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffebee;
+    }
+
+    h1 {
+      margin: 1em 0;
+      font-size: 1.8em;
+      text-align: center;
+      color: #b71c1c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80);
+      color: #ffffff;
+      font-size: 0.9em;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .rules-container {
+      width: 95%;
+      max-width: 600px;
+      background: linear-gradient(135deg, #ffffff, #ffe5e5);
+      border-radius: 15px;
+      padding: 1em;
+      box-shadow: 0 0 15px rgba(183, 28, 28, 0.1);
+      margin-bottom: 2em;
+    }
+
+    .rule-item {
+      background: linear-gradient(135deg, #fffafa, #ffe5e5);
+      padding: 0.8em 1em;
+      margin: 0.5em 0;
+      border-radius: 12px;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 0.8em;
+      box-shadow: 0 3px 8px rgba(183, 28, 28, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #b71c1c;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rule-item::before {
+      content: "📌";
+      font-size: 1.2em;
+    }
+
+    .rule-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 16px rgba(183, 28, 28, 0.08);
+    }
+
+    .timer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 9999;
+      transition: background 0.5s, color 0.5s;
+      font-size: 2em;
+    }
+
+    #overlay-time {
+      font-size: 2.5em;
+      margin-bottom: 0.3em;
+    }
+
+    #overlay-activity {
+      font-size: 1em;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2em;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo-container {
+        margin-right: 0.5em;
+        margin-bottom: 0;
+      }
+
+      .logo {
+        width: 45px;
+        height: 45px;
+      }
+
+      .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5em;
+      }
+
+      nav a {
+        font-size: 0.9em;
+        padding: 0.3em 0.5em;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      .rule-item {
+        font-size: 1em;
+        gap: 0.5em;
+      }
+
+      .timer-overlay {
+        font-size: 1.5em;
+      }
+
+      #overlay-time {
+        font-size: 2em;
+      }
+    }
+  </style>
+
+
+</head>
+<body>
+
+<nav>
+  <div class="logo-container">
+    <img src="logo.jpg" alt="CONTROL + ALT + DELETE Logo" class="logo">
+  </div>
+  <div class="nav-links">
+    <a href="index.html">الصفحة الرئيسية</a>
+    <a href="rooms.html">الغرف</a>
+    <a href="teams.html">الفرق</a>
+    <a href="rules.html">القوانين</a>
+    <a href="program.html">البرنامج</a>
+  </div>
+</nav>
+
+
+<h1>📜 قوانين المؤتمر</h1>
+<div class="rules-container" id="rulesContainer">
+  <p>Loading rules...</p>
+</div>
+
+<footer>© 2025 CONTROL + ALT + DELETE Camp. All rights reserved.</footer>
+
+<script>
+// fetch rules from Google Sheet
+async function fetchRules() {
+    const container = document.getElementById("rulesContainer");
+    container.innerHTML = "<p>Loading rules...</p>";
+    try {
+        const response = await fetch('https://opensheet.elk.sh/12TI5WknAiuO10kTWGyXH7RlwnJNY5lpZsM1uNXBxekM/Rules');
+        const data = await response.json();
+        container.innerHTML = "";
+        data.forEach(item => {
+            if (item.Rule) {
+                const ruleDiv = document.createElement("div");
+                ruleDiv.className = "rule-item";
+                ruleDiv.textContent = item.Rule;
+                container.appendChild(ruleDiv);
+            }
+        });
+        if (!data.length) {
+            container.innerHTML = "<p>No rules found.</p>";
+        }
+    } catch (error) {
+        container.innerHTML = "<p style='color:red;'>Failed to load rules.</p>";
+        console.error("Error fetching rules:", error);
+    }
+}
+
+// load rules on page load
+fetchRules();
+</script>
+
+</body>
+</html>

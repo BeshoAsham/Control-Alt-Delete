@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CONTROL + ALT + DELETE Camp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+          margin: 0; padding: 0;
+          font-family: 'Cairo', sans-serif;
+          background: #ffffff; /* خلفية بيضاء */
+          color: #7f0000; /* أحمر داكن للنص */
+          display: flex; flex-direction: column; align-items: center;
+          min-height: 100vh;
+        }
+
+        nav {
+          background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80); /* تدرج أحمر غني */
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.8em 1em;
+          width: 100%;
+        }
+
+        .logo-container {
+          flex-shrink: 0;
+          margin-right: 1em;
+        }
+
+        .logo {
+          width: 60px; height: 60px; border-radius: 50%;
+          object-fit: cover; border: 3px solid #ffffff;
+          box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .logo:hover {
+          transform: scale(1.1) rotate(2deg);
+          box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1em;
+          align-items: center;
+        }
+
+        nav a {
+          color: white;
+          text-decoration: none;
+          transition: 0.3s;
+        }
+
+        nav a:hover {
+          color: #ffebee;
+        }
+
+        h1 {
+          margin: 1em 0;
+          font-size: 1.8em;
+          text-align: center;
+        }
+
+        #teamsChartContainer {
+          position: relative;
+          width: 95%;
+          max-width: 900px;
+          padding: 1.2em;
+          margin-bottom: 2em;
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(183, 28, 28, 0.1);
+        }
+
+        #teamsChartContainer::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('logo.jpg') center center / cover no-repeat;
+            opacity: 0.05;
+            pointer-events: none;
+            filter: grayscale(100%) brightness(1.1);
+        }
+
+        footer {
+          text-align: center;
+          padding: 1em;
+          background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80); /* نفس تدرج الأحمر */
+          color: #ffffff;
+          font-size: 0.9em;
+          width: 100%;
+          margin-top: auto;
+        }
+
+        .timer-overlay {
+          position: fixed; top: 0; left: 0;
+          width: 100vw; height: 100vh;
+          display: flex; flex-direction: column;
+          justify-content: center; align-items: center;
+          text-align: center;
+          z-index: 9999;
+          transition: background 0.5s, color 0.5s;
+          font-size: 2em;
+          background: rgba(255, 230, 230, 0.85);
+          color: #b71c1c;
+        }
+
+        #overlay-time { font-size: 2.5em; margin-bottom: 0.3em; }
+        #overlay-activity { font-size: 1em; }
+
+        @media (max-width: 700px) {
+          nav {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .logo-container {
+            margin-right: 0;
+            margin-bottom: 0.5em;
+          }
+          .nav-links {
+            flex-direction: column;
+            align-items: center;
+          }
+          .logo {
+            width: 50px; height: 50px;
+          }
+          h1 { font-size: 1.5em; }
+          .timer-overlay { font-size: 1.5em; }
+          #overlay-time { font-size: 2em; }
+        }
+
+        .menu-toggle {
+          display: none;
+          font-size: 2em;
+          cursor: pointer;
+          color: white;
+        }
+
+        @media (max-width: 700px) {
+          nav {
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+          }
+          .logo-container {
+            margin-right: 0.5em;
+            margin-bottom: 0;
+          }
+          .logo {
+            width: 45px; height: 45px;
+          }
+          .nav-links {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.5em;
+          }
+          nav a {
+            font-size: 0.9em;
+            padding: 0.3em 0.5em;
+          }
+          h1 { font-size: 1.4em; }
+        }
+    </style>
+
+
+</head>
+<body>
+
+<nav>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="CONTROL + ALT + DELETE Logo" class="logo">
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">الصفحة الرئيسية</a>
+        <a href="rooms.html">الغرف</a>
+        <a href="teams.html">الفرق</a>
+        <a href="rules.html">القوانين</a>
+        <a href="program.html">البرنامج</a>
+    </div>
+</nav>
+
+
+<h1>📊 Puremeter</h1>
+
+<div id="teamsChartContainer">
+    <canvas id="teamsChart"></canvas>
+</div>
+
+<footer>© 2025 CONTROL + ALT + DELETE Camp. All rights reserved.</footer>
+
+<div id="timer-overlay" class="timer-overlay" style="display:none;">
+    <div id="overlay-time">--:--</div>
+    <div id="overlay-activity">Loading...</div>
+</div>
+
+<script>
+    // Notifications
+    if ("Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission().catch(()=>{});
+    }
+
+    // Timer
+    let schedule = [];
+    let notifiedActivities = {};
+    async function fetchSchedule() {
+        try {
+            const response = await fetch('https://opensheet.elk.sh/12TI5WknAiuO10kTWGyXH7RlwnJNY5lpZsM1uNXBxekM/ScoreSystem');
+            const data = await response.json();
+  console.log("✅ DATA FROM SHEET:", data);
+
+            schedule = data.map(row => ({
+                time: row.Time,
+                name: row.Name
+            }));
+            console.log("✅ Schedule updated:", schedule);
+        } catch (error) {
+            console.error("❌ Error fetching schedule:", error);
+        }
+    }
+    const overlay = document.getElementById('timer-overlay');
+    const overlayTime = document.getElementById('overlay-time');
+    const overlayActivity = document.getElementById('overlay-activity');
+    function updateOverlay() {
+        const now = new Date();
+        if (!schedule.length) return;
+        for (let item of schedule) {
+            if (!item.time || !item.name) continue;
+            const [h, m] = item.time.split(":").map(Number);
+            const start = new Date();
+            start.setHours(h, m, 0, 0);
+            const before5Min = new Date(start.getTime() - 5 * 60000);
+            const after5Min = new Date(start.getTime() + 5 * 60000);
+            if (now >= before5Min && now <= after5Min) {
+                overlay.style.display = "flex";
+                document.body.style.overflow = "hidden";
+                if (now < start) {
+                    const diffMs = start - now;
+                    const min = Math.floor(diffMs / 60000);
+                    const sec = Math.floor((diffMs % 60000) / 1000);
+                    overlayTime.textContent = `${min}:${sec.toString().padStart(2,'0')}`;
+                    overlayActivity.textContent = `⏳ Upcoming: ${item.name}`;
+                    overlay.style.background = "linear-gradient(135deg, #e0f2f1, #a7ffeb)";
+                    overlay.style.color = "#1b5e20";
+                } else {
+                    const diffMs = now - start;
+                    const min = Math.floor(diffMs / 60000);
+                    const sec = Math.floor((diffMs % 60000) / 1000);
+                    overlayTime.textContent = `${min}:${sec.toString().padStart(2,'0')}`;
+                    overlayActivity.textContent = `🔴 Now: ${item.name}`;
+                    overlay.style.background = "#d32f2f"; // red
+                    overlay.style.color = "#ffffff";
+                    if (!notifiedActivities[item.time]) {
+                        if (Notification.permission === "granted") {
+                            new Notification("⏰ Activity Started!", {
+                                body: `${item.name} has started now.`,
+                                icon: "https://cdn-icons-png.flaticon.com/512/929/929564.png"
+                            });
+                        }
+                        notifiedActivities[item.time] = true;
+                    }
+                }
+                return;
+            }
+        }
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    // Chart
+    let teams = [];
+    async function fetchTeams() {
+        try {
+            const response = await fetch('https://opensheet.elk.sh/12TI5WknAiuO10kTWGyXH7RlwnJNY5lpZsM1uNXBxekM/ScoreSystem');
+            const data = await response.json();
+const newTeams = data.map(row => ({
+  name: row.Name || "Unnamed",
+  score: Number(row.Score || 0)
+}));
+console.log("📊 Parsed teams:", newTeams);
+            const changed = JSON.stringify(newTeams) !== JSON.stringify(teams);
+            if (changed) {
+                teams = newTeams;
+                updateTeamsChart();
+                console.log("✅ Chart updated with new data.");
+            }
+        } catch (error) {
+            console.error("❌ Error fetching team data:", error);
+        }
+    }
+    const ctx = document.getElementById('teamsChart').getContext('2d');
+    const teamsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Points',
+                data: [],
+                backgroundColor: [
+                    'rgba(244, 67, 54, 0.8)',    // Red
+                    'rgba(76, 175, 80, 0.8)',    // Green
+                    'rgba(255, 235, 59, 0.8)',   // Yellow
+                    'rgba(33, 150, 243, 0.8)',   // Blue
+                    'rgba(233, 30, 99, 0.8)',    // Pink
+                    'rgba(255, 152, 0, 0.8)',    // Orange
+                    'rgba(156, 39, 176, 0.8)'    // Purple
+                ],
+                borderColor: [
+                    'rgba(244, 67, 54, 1)',
+                    'rgba(76, 175, 80, 1)',
+                    'rgba(255, 235, 59, 1)',
+                    'rgba(33, 150, 243, 1)',
+                    'rgba(233, 30, 99, 1)',
+                    'rgba(255, 152, 0, 1)',
+                    'rgba(156, 39, 176, 1)'
+                ],
+                borderWidth: 2,
+                borderRadius: 12,
+    barThickness: window.innerWidth < 700 ? 20 : 40,
+    categoryPercentage: 0.6,
+    barPercentage: 0.8,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Puremeter 🌿',
+                    font: { size: 20, weight: 'bold' },
+                    color: '#7f0000'
+                },
+                tooltip: {
+                    backgroundColor: '#ffffff',
+                    titleColor: '#000000',
+                    bodyColor: '#000000',
+                    borderColor: '#ccc',
+                    borderWidth: 1
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { color: '#1b5e20', font: { weight: 'bold' } }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { color: '#1b5e20', font: { weight: 'bold' } }
+                }
+            },
+            animation: {
+                duration: 1000,
+                easing: 'easeOutBounce'
+            }
+        }
+    });
+
+    function updateTeamsChart() {
+        teamsChart.data.labels = teams.map(t => t.name);
+        teamsChart.data.datasets[0].data = teams.map(t => t.score);
+        teamsChart.update();
+        console.log("📊 Labels to be added:", teams.map(t => t.name));
+        console.log("📊 Scores to be added:", teams.map(t => t.score));
+
+    }
+
+    // Run
+    fetchSchedule();
+    setInterval(fetchSchedule, 5000);
+    setInterval(updateOverlay, 1000);
+    fetchTeams();
+    setInterval(fetchTeams, 3000);
+</script>
+
+
+</body>
+</html>
