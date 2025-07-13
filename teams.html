@@ -9,219 +9,162 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Cairo', sans-serif;
-      background: #ffffff;
-      color: #7f0000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+     margin: 0;
+     padding: 0;
+     font-family: 'Cairo', sans-serif;
+     background: #ffffff;
+     color: #7f0000;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     min-height: 100vh;
+     direction: rtl;
+   }
 
-    nav {
-      background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.8em 1em;
-      width: 100%;
-    }
+   nav {
+     background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80);
+     color: white;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 0.8em 1em;
+     width: 100%;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   }
 
-    .logo-container {
-      flex-shrink: 0;
-      margin-right: 1em;
-    }
+   .logo-container {
+     margin-bottom: 0.5em;
+   }
 
-    .logo {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ffffff;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
+   .logo {
+     width: 60px;
+     height: 60px;
+     border-radius: 50%;
+     object-fit: cover;
+     border: 3px solid #ffffff;
+     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+     transition: transform 0.4s ease, box-shadow 0.4s ease;
+   }
 
-    .logo:hover {
-      transform: scale(1.1) rotate(2deg);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-    }
+   .logo:hover {
+     transform: scale(1.1) rotate(2deg);
+     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+   }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1em;
-      align-items: center;
-    }
+   .nav-links {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 1em;
+     justify-content: center;
+   }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+   nav a {
+     color: white;
+     text-decoration: none;
+     transition: 0.3s;
+   }
 
-    nav a:hover {
-      color: #ffebee;
-    }
+   nav a:hover {
+     color: #ffebee;
+   }
 
-    h1,
-    header {
-      margin: 1em 0;
-      font-size: 1.8em;
-      text-align: center;
-      color: #b71c1c;
-    }
+   h1,
+   header {
+     margin: 1em 0;
+     font-size: 1.8em;
+     text-align: center;
+     color: #b71c1c;
+   }
 
-    footer {
-      text-align: center;
-      padding: 1em;
-      background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80);
-      color: #ffffff;
-      font-size: 0.9em;
-      width: 100%;
-      margin-top: auto;
-    }
+   footer {
+     text-align: center;
+     padding: 1em;
+     background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80);
+     color: #ffffff;
+     font-size: 0.9em;
+     width: 100%;
+     margin-top: auto;
+   }
 
-    .teams-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1em;
-      width: 95%;
-      max-width: 1000px;
-      padding: 1em;
-    }
+   .teams-container {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+     gap: 1em;
+     width: 95%;
+     max-width: 1000px;
+     padding: 1em;
+   }
 
-    .team-card {
-      background: linear-gradient(135deg, #ffffff, #ffe5e5);
-      border-radius: 15px;
-      padding: 1em;
-      box-shadow: 0 4px 12px rgba(183, 28, 28, 0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+   .team-card {
+     background: linear-gradient(135deg, #ffffff, #ffe5e5);
+     border-radius: 15px;
+     padding: 1em;
+     box-shadow: 0 4px 12px rgba(183, 28, 28, 0.08);
+     transition: transform 0.3s, box-shadow 0.3s;
+   }
 
-    .team-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(183, 28, 28, 0.15);
-    }
+   .team-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 8px 18px rgba(183, 28, 28, 0.15);
+   }
 
-    .team-card h3 {
-      font-size: 1.2em;
-      color: #b71c1c;
-      border-bottom: 2px solid #c62828;
-      padding-bottom: 0.3em;
-      margin-bottom: 0.5em;
-      text-align: center;
-    }
+   .team-card h3 {
+     font-size: 1.2em;
+     color: #b71c1c;
+     border-bottom: 2px solid #c62828;
+     padding-bottom: 0.3em;
+     margin-bottom: 0.5em;
+     text-align: center;
+   }
 
-    .team-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+   .team-card ul {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
 
-    .team-card li {
-      padding: 0.3em 0.5em;
-      margin: 0.2em 0;
-      background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-      font-size: 0.95em;
-      text-align: center;
-      color: #b71c1c;
-    }
+   .team-card li {
+     padding: 0.3em 0.5em;
+     margin: 0.2em 0;
+     background: #ffffff;
+     border-radius: 8px;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+     font-size: 0.95em;
+     text-align: center;
+     color: #b71c1c;
+   }
 
-    .timer-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      z-index: 9999;
-      transition: background 0.5s, color 0.5s;
-      font-size: 2em;
-    }
+   @media (max-width: 700px) {
+     .logo {
+       width: 50px;
+       height: 50px;
+     }
 
-    #overlay-time {
-      font-size: 2.5em;
-      margin-bottom: 0.3em;
-    }
+     .nav-links {
+       flex-direction: row;
+       justify-content: center;
+       gap: 0.5em;
+     }
 
-    #overlay-activity {
-      font-size: 1em;
-    }
+     nav a {
+       font-size: 0.9em;
+       padding: 0.3em 0.5em;
+     }
 
-    /* Responsive Design */
-    @media (max-width: 600px) {
-      .team-card h3 {
-        font-size: 1.05em;
-      }
+     h1,
+     header {
+       font-size: 1.5em;
+     }
 
-      header {
-        font-size: 1.5em;
-      }
+     .team-card h3 {
+       font-size: 1.05em;
+     }
 
-      .team-card li {
-        font-size: 0.9em;
-      }
-    }
+     .team-card li {
+       font-size: 0.9em;
+     }
+   }
 
-    @media (max-width: 700px) {
-      nav {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .logo-container {
-        margin-right: 0.5em;
-        margin-bottom: 0;
-      }
-
-      .logo {
-        width: 45px;
-        height: 45px;
-      }
-
-      .nav-links {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5em;
-      }
-
-      nav a {
-        font-size: 0.9em;
-        padding: 0.3em 0.5em;
-      }
-
-      h1,
-      header {
-        font-size: 1.4em;
-      }
-
-      .timer-overlay {
-        font-size: 1.5em;
-      }
-
-      #overlay-time {
-        font-size: 2em;
-      }
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2em;
-      cursor: pointer;
-      color: white;
-    }
   </style>
 
 
