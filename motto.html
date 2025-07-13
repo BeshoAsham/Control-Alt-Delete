@@ -150,23 +150,56 @@
           margin-top: auto;
         }
 
-        @media (max-width: 600px) {
-          .motto-text {
-            font-size: 1.05em;
-          }
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
 
-          .logo {
-            width: 45px;
-            height: 45px;
-          }
+      .logo-container {
+        margin-right: 0.5em;
+        margin-bottom: 0;
+      }
 
-          nav a {
-            font-size: 0.9em;
-          }
+      .logo {
+        width: 45px;
+        height: 45px;
+      }
 
-          .audio-title {
-            font-size: 1.3em;
-          }
+      .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5em;
+      }
+
+      nav a {
+        font-size: 0.9em;
+        padding: 0.3em 0.5em;
+      }
+
+      h1,
+      header {
+        font-size: 1.4em;
+      }
+
+      .timer-overlay {
+        font-size: 1.5em;
+      }
+
+      #overlay-time {
+        font-size: 2em;
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2em;
+      cursor: pointer;
+      color: white;
+    }
+
         }
     </style>
 </head>
