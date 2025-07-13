@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>شعار المؤتمر | CONTROL + ALT + DELETE Camp</title>
-    <link rel="icon" type="image/png" href="logo.jpg">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet" />
     <style>
         body {
           margin: 0;
@@ -24,16 +24,15 @@
           background: linear-gradient(90deg, #8e0000, #b71c1c, #c62828, #e53935, #ff8a80);
           color: white;
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: center;
           padding: 0.8em 1em;
           width: 100%;
-          direction: ltr;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .logo-container {
-          flex-shrink: 0;
-          margin-right: 1em;
+          margin-bottom: 0.5em;
         }
 
         .logo {
@@ -55,7 +54,7 @@
           display: flex;
           flex-wrap: wrap;
           gap: 1em;
-          align-items: center;
+          justify-content: center;
         }
 
         nav a {
@@ -136,8 +135,14 @@
         }
 
         @keyframes pop {
-          0% { transform: scale(1); color: #d50000; }
-          100% { transform: scale(1.08); color: #ff1744; }
+          0% {
+            transform: scale(1);
+            color: #d50000;
+          }
+          100% {
+            transform: scale(1.08);
+            color: #ff1744;
+          }
         }
 
         footer {
@@ -150,56 +155,34 @@
           margin-top: auto;
         }
 
-    @media (max-width: 700px) {
-      nav {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-      }
+        @media (max-width: 700px) {
+          .logo {
+            width: 50px;
+            height: 50px;
+          }
 
-      .logo-container {
-        margin-right: 0.5em;
-        margin-bottom: 0;
-      }
+          .nav-links {
+            flex-direction: row;
+            justify-content: center;
+            gap: 0.5em;
+          }
 
-      .logo {
-        width: 45px;
-        height: 45px;
-      }
+          nav a {
+            font-size: 0.9em;
+            padding: 0.3em 0.5em;
+          }
 
-      .nav-links {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5em;
-      }
+          h1 {
+            font-size: 1.5em;
+          }
 
-      nav a {
-        font-size: 0.9em;
-        padding: 0.3em 0.5em;
-      }
+          .audio-title {
+            font-size: 1.3em;
+          }
 
-      h1,
-      header {
-        font-size: 1.4em;
-      }
-
-      .timer-overlay {
-        font-size: 1.5em;
-      }
-
-      #overlay-time {
-        font-size: 2em;
-      }
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2em;
-      cursor: pointer;
-      color: white;
-    }
-
+          .motto-text {
+            font-size: 1em;
+          }
         }
     </style>
 </head>
@@ -207,7 +190,7 @@
 
 <nav>
     <div class="logo-container">
-        <img src="logo.jpg" alt="CONTROL + ALT + DELETE Logo" class="logo">
+        <img src="logo.jpg" alt="CONTROL + ALT + DELETE Logo" class="logo" />
     </div>
     <div class="nav-links">
         <a href="index.html">الصفحة الرئيسية</a>
@@ -223,31 +206,34 @@
 
 <div class="motto-container">
     <div class="motto-text">
-        أهلاً وسهلاً شرفتوا ..... اتفضلوا ده انتوا أنستوا
-        مطرحكوا ده وكمان بيتكوا ..... يساع من الأحباب ملايين
+        أهلاً وسهلاً شرفتوا ..... اتفضلوا ده انتوا<br>
+        أنستوا<br>
+        مطرحكوا ده وكمان بيتكوا ..... يساع من الأحباب ملايين<br><br>
 
-        وهو ده كلام الشيطان ..... عايزك تكون على طول غفلان
-        تفضل يا واد دايمًا نعسان ..... وتقول مفيش فايدة فيّا
+        وهو ده كلام الشيطان ..... عايزك تكون<br>
+        على طول غفلان<br>
+        تفضل يا واد دايمًا نعسان ..... وتقول<br>
+        مفيش فايدة فيّا<br><br>
 
-        😤 لااااا !!!! ...
-        🚀 دوس كونترول الت دليت
+        😤 لااااا !!!! ...<br>
+        🚀 دوس كونترول الت دليت<br><br>
 
-        هتكنترول قلبك م الشر ..... عشان يكون دايمًا علبرّ
-        ✋ امسك في إيده ده بدل المر ..... هيحررك من العبودية
+        هتكنترول قلبك م الشر ..... عشان يكون دايمًا علبرّ<br>
+        ✋ امسك في إيده ده بدل المر ..... هيحررك من العبودية<br><br>
 
-        ✨ Alt إبدأ في طريق النور ..... في أي وقت إبدأ على طول
-        متقولش لما يجيلك الدور ..... يلا Delete كل خطية
+        ✨ Alt إبدأ في طريق النور ..... في أي وقت إبدأ على طول<br>
+        متقولش لما يجيلك الدور ..... يلا Delete كل خطية<br><br>
 
-        🎯 دووووس ...
-        🔥 دوس كونترول الت دليت
+        🎯 دووووس ...<br>
+        🔥 دوس كونترول الت دليت<br><br>
 
-        💭 حلم القداسة مش حلم بعيد ..... تقدر تكون إنسان جديد
-        فاكر داوود وقع وقام ..... ومسبش نفسه للتوهان
+        💭 حلم القداسة مش حلم بعيد ..... تقدر تكون إنسان جديد<br>
+        فاكر داوود وقع وقام ..... ومسبش نفسه للتوهان<br><br>
 
-        عندك كتير مش بس داوود ..... غلطوا لكن قطعوا وعود
-        فلو إبليس عايزك مربوط ..... الحل في تلات كلمات
+        عندك كتير مش بس داوود ..... غلطوا لكن قطعوا وعود<br>
+        فلو إبليس عايزك مربوط ..... الحل في تلات كلمات<br><br>
 
-        🎤 إييييهه ؟؟ ...
+        🎤 إييييهه ؟؟ ...<br>
         👏 دوس كونترول الت دليت
     </div>
 
@@ -255,7 +241,7 @@
 
     <div class="audio-wrapper">
         <audio controls>
-            <source src="Control .wav" type="audio/mpeg">
+            <source src="Control.wav" type="audio/wav" />
             المتصفح لا يدعم تشغيل الصوت.
         </audio>
     </div>
