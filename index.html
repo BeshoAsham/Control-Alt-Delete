@@ -276,8 +276,8 @@ nav a:hover {
                     overlay.style.color = "#ffffff";
                     if (!notifiedActivities[item.time]) {
                         if (Notification.permission === "granted") {
-                            new Notification("⏰ بدأت!!", {
-                                body: `${item.name} has started now.`,
+                            new Notification("⏰ بسرعة", {
+                                body: `${item.name} بدأت دلوقتي`,
                                 icon: "https://cdn-icons-png.flaticon.com/512/929/929564.png"
                             });
                         }
