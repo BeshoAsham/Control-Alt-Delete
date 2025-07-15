@@ -263,7 +263,7 @@ nav a:hover {
                     const min = Math.floor(diffMs / 60000);
                     const sec = Math.floor((diffMs % 60000) / 1000);
                     overlayTime.textContent = `${min}:${sec.toString().padStart(2,'0')}`;
-                    overlayActivity.textContent = `⏳ Upcoming: ${item.name}`;
+                    overlayActivity.textContent = `⏳ قادم: ${item.name}`;
                     overlay.style.background = "linear-gradient(135deg, #e0f2f1, #a7ffeb)";
                     overlay.style.color = "#1b5e20";
                 } else {
@@ -271,12 +271,12 @@ nav a:hover {
                     const min = Math.floor(diffMs / 60000);
                     const sec = Math.floor((diffMs % 60000) / 1000);
                     overlayTime.textContent = `${min}:${sec.toString().padStart(2,'0')}`;
-                    overlayActivity.textContent = `🔴 Now: ${item.name}`;
+                    overlayActivity.textContent = `🔴 الان: ${item.name}`;
                     overlay.style.background = "#d32f2f"; // red
                     overlay.style.color = "#ffffff";
                     if (!notifiedActivities[item.time]) {
                         if (Notification.permission === "granted") {
-                            new Notification("⏰ Activity Started!", {
+                            new Notification("⏰ بدأت!!", {
                                 body: `${item.name} has started now.`,
                                 icon: "https://cdn-icons-png.flaticon.com/512/929/929564.png"
                             });
